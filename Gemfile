@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'json_spec'
   gem 'pry'
   gem 'fabrication'
 end
