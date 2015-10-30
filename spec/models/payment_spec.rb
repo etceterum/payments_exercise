@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Payment, type: :model do
-  let(:loan) { Loan.create! funded_amount: 1000 }
-  let(:payment) { described_class.create! loan: loan, amount: 100 }
+  let(:loan) { Fabricate(:loan) }
+  let(:payment) { Fabricate(:payment, loan: loan) }
 
   describe 'associations' do
     it { is_expected.to belong_to :loan }
@@ -11,21 +11,23 @@ RSpec.describe Payment, type: :model do
   describe 'validations' do
     # loan
     it { is_expected.to validate_presence_of :loan }
+    
     # amount
     it { is_expected.to validate_presence_of :amount }
     it { is_expected.to validate_numericality_of(:amount).is_greater_than(0) }
 
+    # custom validation
     describe 'amount cap validation' do
       context 'when in range' do
-        let(:new_payment) { described_class.new loan: loan, amount: 100 }
-        
+        let(:new_payment) { Fabricate.build(:payment, loan: loan) }
+
         it 'should create payment' do
           expect(new_payment.save).to be true
         end
       end
 
       context 'when too high' do
-        let(:new_payment) { described_class.new loan: loan, amount: 1001 }
+        let(:new_payment) { Fabricate.build(:payment, loan: loan, amount: 1001) }
 
         it 'should not create payment' do
           expect(new_payment.save).to be false

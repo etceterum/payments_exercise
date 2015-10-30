@@ -18,5 +18,4 @@ I tried to focus on the objective stated above and not fix the code that pre-exi
 * Controller
 * Controller spec
 * JSON formatting
-* Should probably use Fabrication gem for specs
 * Back-fill missing validations and constraints on the Loan class? Add specs?
