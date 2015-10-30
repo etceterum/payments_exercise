@@ -15,7 +15,11 @@ For this assignment, I tried to be more verbose in comments than usual and expla
 I tried to focus on the objective stated above and not fix the code that pre-existed (e.g., I did not add any validations to the Loan class and didn't add any tests for that class). Instead, in places where I saw an opportunity for improvement, I'd add a comment documenting such opportunity. If fixing the existing code was a hidden objective, please let me know and I will fill that gap.
 
 ## TODOs
-* Controller
+* Payments Controller:
+	* Actions:
+		- Create payment
+		- Show individual payment
+		- Show all payments of a given loan 
+	* Return validation errors on create
 * Controller spec
-* JSON formatting
 * Back-fill missing validations and constraints on the Loan class? Add specs?
