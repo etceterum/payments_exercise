@@ -18,7 +18,7 @@ Perhaps, I oversimplified the problem, but I made an assumption that the "create
 
 I used ActiveModelSerializers gem for formatting models as JSON, as this way is preferred by the Rails community to using `as_json` on the model, and is overall more flexible and powerful; in fact, it is part of Rails 5.
 
-Please check the note regarding `outstanding_balance` inside loan_serializer.rb regarding efficiency. I did not implement the solution to the (N + 1) query problem in this assignment because I don't know of any _elegant_ solution, and I didn't want my code to look heavy or ugly for obvious reasons. The two potential database solutions to the mentioned N + 1 problem would be to either perform the sum calculation in a database view, or to use custom SQL to fetch data. I can implement either approach on request.
+Please check the note next to `outstanding_balance` inside `loan_serializer.rb` regarding efficiency. I did not implement the solution to the (N + 1) query problem in this assignment because I am not aware of any _elegant_ solution, and I didn't want my code to look heavy or ugly for obvious reasons. The two potential database solutions to the mentioned N + 1 problem would be to either perform the sum calculation in a database view, or to use custom SQL to fetch data. I can implement either approach on request.
 Alternatively, it'd be possible to eliminate the (N + 1) query by transferring the calculations into the application space from the 
 database space like so: 
 ```Ruby
