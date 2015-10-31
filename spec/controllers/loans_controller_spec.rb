@@ -9,7 +9,7 @@ RSpec.describe LoansController, type: :controller do
   end
 
   describe '#show' do
-    let(:loan) { Fabricate(:loan, funded_amount: 100.0) }
+    let(:loan) { Fabricate(:loan) }
 
     it 'responds with a 200' do
       get :show, id: loan.id
