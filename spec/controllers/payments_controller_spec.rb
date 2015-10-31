@@ -6,9 +6,9 @@ RSpec.describe PaymentsController, type: :controller do
   describe '#create' do
     let(:create_params) { { format: :json, payment: { amount: loan.funded_amount/2 } } }
 
-    it 'responds with a 200' do
+    it 'responds with a 201' do
       get :create, create_params.merge(loan_id: loan.id)
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:created)
     end
 
     context 'if the loan is not found' do
