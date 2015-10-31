@@ -16,6 +16,20 @@ I tried to focus on the objective stated above and not fix the code that pre-exi
 
 Perhaps, I oversimplified the problem, but I made an assumption that the "created_at" timestamp on Payment model represents the date of payment. If this assumption is incorrect, it'd be trivial to add an explicitly managed separate timestamp to the Payment model.
 
+I used ActiveModelSerializers gem for formatting models as JSON, as this way is preferred by the Rails community to using `as_json` on the model, and is overall more flexible and powerful; in fact, it is part of Rails 5.
+
+Please check the note regarding `outstanding_balance` inside loan_serializer.rb regarding efficiency. I did not implement the solution to the (N + 1) query problem in this assignment because I don't know of any _elegant_ solution, and I didn't want my code to look heavy or ugly for obvious reasons. The two potential database solutions to the mentioned N + 1 problem would be to either perform the sum calculation in a database view, or to use custom SQL to fetch data. I can implement either approach on request.
+Alternatively, it'd be possible to eliminate the (N + 1) query by transferring the calculations into the application space from the 
+database space like so: 
+```Ruby
+loans = Loan.eager_load(:payments).all
+for loan in loans
+	# this won't cause extra trips to the database!
+	outstanding_balance = loan.funded_amount - loan.payments.map(&:amount).sum
+end
+```
+However, this could potentially cause memory overflow if the count of loans in the database is high and no proper pagination is implemented.
+
 ## Usage Examples
 
 Create Payment
@@ -32,7 +46,3 @@ Get all Payments on a given Loan
 ```
 curl -XGET http://localhost:3000/loans/1/payments
 ```
-
-## TODOs
-* Back-fill missing validations and constraints on the Loan class? Add specs?
-* LoansController#index has an N+1 problem after adding outstanding_balance
