@@ -14,6 +14,8 @@ For this assignment, I tried to be more verbose in comments than usual and expla
 
 I tried to focus on the objective stated above and not fix the code that pre-existed (e.g., I did not add any validations to the Loan class and didn't add any tests for that class). Instead, in places where I saw an opportunity for improvement, I'd add a comment documenting such opportunity. If fixing the existing code was a hidden objective, please let me know and I will fill that gap.
 
+Perhaps, I oversimplified the problem, but I made an assumption that the "created_at" timestamp on Payment model represents the date of payment. If this assumption is incorrect, it'd be trivial to add an explicitly managed separate timestamp to the Payment model.
+
 ## Usage Examples
 
 Create Payment
